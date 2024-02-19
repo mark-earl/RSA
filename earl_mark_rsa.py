@@ -44,15 +44,17 @@ def isPrime(n):
 
     return True
 
-def generate_random_large_integer(digits):
-    first_digit = random.randint(1, 9)
-    remaining_digits = [random.randint(0, 9) for _ in range(digits - 1)]
-    return int(''.join(map(str, [first_digit] + remaining_digits)))
+# ref: https://stackoverflow.com/questions/2673385/how-to-generate-a-random-number-with-a-specific-amount-of-digits
+def random_with_N_digits(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return random.randint(range_start, range_end)
 
+# generate a number of `digits` digits that is most likely prime
 def generate_random_prime(digits):
-    number = generate_random_large_integer(digits)
+    number = random_with_N_digits(digits)
     while not isPrime(number):
-        number = generate_random_large_integer(digits)
+        number = random_with_N_digits(digits)
     return number
 
 def generate_keypair(p, q):
