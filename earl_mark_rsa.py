@@ -57,6 +57,7 @@ def generate_random_prime(digits):
         number = random_with_N_digits(digits)
     return number
 
+# Loosely based on: https://devrescue.com/python-rsa-encrypt-decrypt-example/#:~:text=The%20generate_keypair%20%28%29%20function%20does%20just%20that%3A%20generate,of%20p%20and%20q%20is%20calculated%20as%20n.
 def generate_keypair(p, q):
     n = p * q
     phi = (p - 1) * (q - 1)
@@ -69,7 +70,7 @@ def generate_keypair(p, q):
         e += 2  # Incrementing by 2 to keep it odd
 
     # Calculate the modular multiplicative inverse of e
-    # Source: https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
+    # ref: https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
     d = pow(e, -1, phi)
 
     return (e, n), (d, n)
